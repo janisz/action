@@ -1,4 +1,4 @@
-name: 'TestForest Dashboard'
+name: 'Junit Test Dashboard'
 description: 'Display test results summary in a GitHub Actions workflow'
 author: 'Edward Thomson'
 inputs:
