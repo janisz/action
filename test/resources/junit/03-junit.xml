@@ -122,4 +122,65 @@
   </testcase>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
+    <testcase name="Verify policy Apache Struts: CVE-2017-5638 is triggered" classname="DefaultPoliciesTest" time="264.996">
+    <failure message="Condition not satisfied:&#10;&#10;waitForViolation(deploymentName,  policyName, 60)&#10;|                |                |&#10;false            qadefpolstruts   Apache Struts: CVE-2017-5638&#10;" type="org.spockframework.runtime.ConditionNotSatisfiedError">Condition not satisfied:
+
+waitForViolation(deploymentName,  policyName, 60)
+|                |                |
+false            qadefpolstruts   Apache Struts: CVE-2017-5638
+
+	at DefaultPoliciesTest.Verify policy #policyName is triggered(DefaultPoliciesTest.groovy:181)
+</failure>
+    <system-out><![CDATA[?[1;30m21:35:15?[0;39m | ?[34mINFO ?[0;39m | DefaultPoliciesTest       | Starting testcase
+?[1;30m21:36:16?[0;39m | ?[34mINFO ?[0;39m | Services                  | Failed to trigger Apache Struts: CVE-2017-5638 after waiting 60 seconds
+?[1;30m21:36:16?[0;39m | ?[1;31mERROR?[0;39m | Helpers                   | An exception occurred in test
+org.spockframework.runtime.ConditionNotSatisfiedError: Condition not satisfied:
+
+waitForViolation(deploymentName,  policyName, 60)
+|                |                |
+false            qadefpolstruts   Apache Struts: CVE-2017-5638
+
+	at DefaultPoliciesTest.$spock_feature_1_0(DefaultPoliciesTest.groovy:181) [1 skipped]
+	at util.OnFailureInterceptor.intercept(OnFailure.groovy:72) [8 skipped]
+	at util.OnFailureInterceptor.intercept(OnFailure.groovy:72) [10 skipped]
+ [6 skipped]
+?[1;30m21:36:16?[0;39m | ?[39mDEBUG?[0;39m | Helpers                   | 2022-09-30 21:36:16 Will collect various stackrox logs for this failure under /tmp/qa-tests-backend-logs/a57dc4b9-70eb-4391-8a00-c5948fef733d/
+?[1;30m21:37:07?[0;39m | ?[39mDEBUG?[0;39m | Helpers                   | Ran: ./scripts/ci/collect-service-logs.sh stackrox /tmp/qa-tests-backend-logs/a57dc4b9-70eb-4391-8a00-c5948fef733d/stackrox-k8s-logs
+Exit: 0
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+  </testcase>
+  <testcase name="TestTimeout" classname="command-line-arguments" time="0.000">
+    <error message="No test result found"><![CDATA[panic: test timed out after 1ns
+
+goroutine 7 [running]:
+testing.(*M).startAlarm.func1()
+	/snap/go/10030/src/testing/testing.go:2036 +0x8e
+created by time.goFunc
+	/snap/go/10030/src/time/sleep.go:176 +0x32
+
+goroutine 1 [chan receive]:
+testing.(*T).Run(0xc0000076c0, {0x5254af?, 0x4b7c05?}, 0x52f280)
+	/snap/go/10030/src/testing/testing.go:1494 +0x37a
+testing.runTests.func1(0xc00007e390?)
+	/snap/go/10030/src/testing/testing.go:1846 +0x6e
+testing.tRunner(0xc0000076c0, 0xc000104cd8)
+	/snap/go/10030/src/testing/testing.go:1446 +0x10b
+testing.runTests(0xc000000140?, {0x5fde10, 0x1, 0x1}, {0x7f398ed8a108?, 0x40?, 0x606c20?})
+	/snap/go/10030/src/testing/testing.go:1844 +0x456
+testing.(*M).Run(0xc000000140)
+	/snap/go/10030/src/testing/testing.go:1726 +0x5d9
+main.main()
+	_testmain.go:47 +0x1aa
+
+goroutine 6 [runnable]:
+testing.pcToName(0x4b7dd4)
+	/snap/go/10030/src/testing/testing.go:1226 +0x3d
+testing.callerName(0x0?)
+	/snap/go/10030/src/testing/testing.go:1222 +0x45
+testing.tRunner(0xc000007860, 0x52f280)
+	/snap/go/10030/src/testing/testing.go:1307 +0x34
+created by testing.(*T).Run
+	/snap/go/10030/src/testing/testing.go:1493 +0x35f]]></error>
+  </testcase>
 </testsuite>

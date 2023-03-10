@@ -71,7 +71,7 @@ describe("junit", async () => {
         const result = await parseJunitFile(`${resourcePath}/03-junit.xml`)
 
         expect(result.counts.passed).to.eql(4)
-        expect(result.counts.failed).to.eql(4)
+        expect(result.counts.failed).to.eql(6)
         expect(result.counts.skipped).to.eql(2)
 
         expect(result.suites.length).to.eql(1)
@@ -86,6 +86,24 @@ describe("junit", async () => {
         expect(result.suites[0].cases[7].name).to.eql("failsTestEight")
         expect(result.suites[0].cases[8].name).to.eql("skipsTestNine")
         expect(result.suites[0].cases[9].name).to.eql("skipsTestTen")
+
+        const ten = result.suites[0].cases[10]
+        expect(ten.name).to.eql("Verify policy Apache Struts: CVE-2017-5638 is triggered")
+        expect(ten.status).to.eql(TestStatus.Fail)
+        expect(ten.duration).to.eql("264.996")
+        expect(ten.description).to.eql("DefaultPoliciesTest")
+        expect(ten.details!.substring(0, 25)).to.eql("Condition not satisfied:\n")
+        expect(ten.stdout!.substring(0, 25)).to.eql("?[1;30m21:35:15?[0;39m | ")
+        expect(ten.stderr).to.eql("")
+
+
+        const eleven = result.suites[0].cases[11]
+        expect(eleven.name).to.eql("TestTimeout")
+        expect(eleven.status).to.eql(TestStatus.Fail)
+        expect(eleven.duration).to.eql("0.000")
+        expect(eleven.description).to.eql("command-line-arguments")
+        expect(eleven.details!.substring(0, 21)).to.eql("panic: test timed out")
+        expect(eleven.message!.substring(0, 21)).to.eql("No test result found")
     })
 
     it("parses bazel", async() => {

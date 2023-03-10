@@ -35,6 +35,9 @@ export interface TestCase {
     name?: string
     description?: string
     details?: string
+    message?: string
+    stdout?: string
+    stderr?: string
     duration?: string
 }
 
@@ -127,7 +130,7 @@ export async function parseTap(data: string): Promise<TestResult> {
             counts.failed++
         } else if (line.match(/^Bail out\!/)) {
             const message = (line.match(/^Bail out\!(.*)/))
-            
+
             if (message) {
                 exception = message[1].trim()
             }
@@ -236,6 +239,9 @@ async function parseJunitXml(xml: any): Promise<TestResult> {
             const duration = testcase.$.time
 
             let details: string | undefined = undefined
+            let stdout: string | undefined = undefined
+            let stderr: string | undefined = undefined
+            let message: string | undefined = undefined
 
             if (testcase.skipped) {
                 status = TestStatus.Skip
@@ -244,17 +250,22 @@ async function parseJunitXml(xml: any): Promise<TestResult> {
             } else if (testcase.failure || testcase.error) {
                 status = TestStatus.Fail
                 details = (testcase.failure || testcase.error)[0]._
-
+                message = (testcase.failure || testcase.error)[0].$?.message
+                stdout = testcase['system-out']?.shift()
+                stderr = testcase['system-err']?.shift()
                 counts.failed++
             } else {
                 counts.passed++
             }
-            
+
             cases.push({
                 status: status,
                 name: name,
                 description: classname,
                 details: details,
+                stdout: stdout,
+                stderr: stderr,
+                message: message,
                 duration: duration
             })
         }

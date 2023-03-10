@@ -194,6 +194,18 @@ function dashboardResults(result: TestResult, show: number) {
                 table += "</code></pre>"
             }
 
+            if (testcase.stdout) {
+                table += "<br/><pre><code>"
+                table += testcase.stderr
+                table += "</code></pre>"
+            }
+
+            if (testcase.stderr) {
+                table += "<br/><pre><code>"
+                table += testcase.stderr
+                table += "</code></pre>"
+            }
+
             table += "</td></tr>\n"
 
             count++
